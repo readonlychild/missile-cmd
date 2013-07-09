@@ -4,7 +4,7 @@ app.use(express.logger());
 app.use(express.static(__dirname + '/'));
 
 app.get('/', function(request, response) {
-  response.sendfile(__dirname + '/game.htm');
+  response.sendfile(__dirname + '/game-fb.htm');
 });
 
 var port = process.env.PORT || 5000;
