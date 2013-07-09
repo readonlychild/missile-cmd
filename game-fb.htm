@@ -71,7 +71,7 @@
 		    	console.log('getLoginStatus', data);
 		    	if (data.status == 'connected') {
 		    		FB.meta = { uid: data.authResponse.userID, accessToken: data.authResponse.accessToken };
-		    		$("#fb-root").html(FB.meta.uid + " " + "<img src='//graph.facebook.com/" + FB.meta.uid + "/picture' height="40" />");
+		    		$("#fb-root").html(FB.meta.uid + " " + "<img src='//graph.facebook.com/" + FB.meta.uid + "/picture' height='40' />");
 		    	}
 		    });
 		  });
