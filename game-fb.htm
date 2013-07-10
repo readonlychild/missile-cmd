@@ -9,7 +9,10 @@
 </head>
 <body>
 	
-	<div id="fb-root">fb</div>
+	<div id="fb-root">
+		<span id="fb-me-pic"></span>
+		<fb:like href="https://apps.facebook.com/ddestroyer/" send="false" width="450" show_faces="true"></fb:like>
+	</div>
 
 	<!--<img src='resources/logo.png' style="float:left;" />-->
 	<div style="background:url('resources/bg1.png') no-repeat 50% bottom;width:600px;height:600px;margin:0 auto; position:relative;">
@@ -61,17 +64,18 @@
 	
 	$(document).ready(function () {
 		
-		$.getScript('//connect.facebook.net/en_US/all.js', function(){
+		$.getScript('//connect.facebook.net/en_US/all.js', function () {
 		    FB.init({
 		      appId: '254664967987502',
 		      channelUrl: '//missile-cmd.herokuapp.com/channel.html',
+		      xfbml: true
 		    });     
 		    //$('#loginbutton,#feedbutton').removeAttr('disabled');
 		    FB.getLoginStatus(function (data) {
 		    	console.log('getLoginStatus', data);
 		    	if (data.status == 'connected') {
 		    		FB.meta = { uid: data.authResponse.userID, accessToken: data.authResponse.accessToken };
-		    		$("#fb-root").html(FB.meta.uid + " " + "<img src='//graph.facebook.com/" + FB.meta.uid + "/picture' height='40' />");
+		    		$("#fb-me-pic").html("<img src='//graph.facebook.com/" + FB.meta.uid + "/picture' height='40' />");
 		    	}
 		    });
 		  });
