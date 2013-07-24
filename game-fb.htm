@@ -83,7 +83,7 @@
 		$("#action-postScore").bind("click", function () {
 			//alert('not implemented yet; refresh page to start again.');
 			$.ajax({
-				url: "http://missile-cmd.herokuapp.com/leaderboard/add/missile-cmd/" + FB.meta.uid + "/" + _gamevars.score,
+				url: "https://missile-cmd.herokuapp.com/leaderboard/add/missile-cmd.score/" + FB.meta.uid + "/" + _gamevars.score,
 				type: 'GET',
 				success: function (data) { }
 			});
