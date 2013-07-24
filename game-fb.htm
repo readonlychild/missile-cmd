@@ -14,6 +14,8 @@
 		<fb:like href="https://apps.facebook.com/ddestroyer/" send="false" width="450" show_faces="true"></fb:like>
 	</div>
 
+	<div id="leaderboard-score"></div>
+
 	<!--<img src='resources/logo.png' style="float:left;" />-->
 	<div style="background:url('resources/bg1.png') no-repeat 50% bottom;width:600px;height:600px;margin:0 auto; position:relative;">
 		<canvas id="canvas-10" width="600" height="600" style="position:absolute;"></canvas>
@@ -64,6 +66,25 @@
 	
 	$(document).ready(function () {
 		
+		//get leaderboard(s)
+		$.ajax({
+			url: "https://missile-cmd.herokuapp.com/leaderboard/missile-cmd.score",
+			type: "GET",
+			success: function (data) {
+				var htm = "";
+				htm += "<ul class='leaderboard'>";
+				for (var i = 0, z = data.length; i < z; i++) {
+					htm += "<li>";
+					htm += "<img src='//graph.facebook.com/" + data[i].userId + "/picture' height='32' style='float:left;' />";
+					htm += "SCORE: " + data[i].score + "<br/>";
+					htm += "<span style='font-size:8pt;color:#ccc;'>" + data[i].created + "</span>";
+					htm += "</li>";
+				}
+				htm += "</ul>";
+				$("#leaderboard-score").html(htm);
+			}
+		});
+
 		$.getScript('//connect.facebook.net/en_US/all.js', function () {
 		    FB.init({
 		      appId: '254664967987502',
@@ -87,6 +108,7 @@
 				type: 'GET',
 				success: function (data) { }
 			});
+			$(this).hide();
 		});
 		
 		$("#action-powerup-explosion").bind("click", function () {
