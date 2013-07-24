@@ -5,6 +5,9 @@ var leaderboard = require('./Leaderboard');
 leaderboard.init({appCode:'test.board'});
 
 var app = express();
+app.use(express.logger());
+app.use(express.static(__dirname + '/'));
+
 
 app.get('/info', function (req, res) {
 	var body = '<h1>Information</h1>';
@@ -43,5 +46,6 @@ app.get('/leaderboard/:code', function (req, res) {
 	//res.end();
 });
 
-app.listen(443);
-console.log('Listening on port 443');
+var port = process.env.PORT || 5000;
+app.listen(port);
+//console.log('Listening on port 443');
