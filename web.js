@@ -43,5 +43,5 @@ app.get('/leaderboard/:code', function (req, res) {
 	//res.end();
 });
 
-app.listen(3000);
-console.log('Listening on port 3000');
+app.listen(433);
+console.log('Listening on port 433');
