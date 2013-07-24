@@ -81,7 +81,12 @@
 		  });
 
 		$("#action-postScore").bind("click", function () {
-			alert('not implemented yet; refresh page to start again.');
+			//alert('not implemented yet; refresh page to start again.');
+			$.ajax({
+				url: "http://missile-cmd.herokuapp.com/leaderboard/add/missile-cmd/" + FB.meta.uid + "/" + _gamevars.score,
+				type: 'GET',
+				success: function (data) { }
+			});
 		});
 		
 		$("#action-powerup-explosion").bind("click", function () {
