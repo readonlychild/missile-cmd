@@ -50,6 +50,7 @@ app.get('/leaderboard/:code', function (req, res) {
 	leaderboard.getLeaders(req.params.code, function (data) {
 		console.log('getLeaders.result', data);
 		res.write(JSON.stringify(data));
+		res.contentType('application/json');
 		res.end();
 	});
 	//res.end();
