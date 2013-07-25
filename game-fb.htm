@@ -99,9 +99,10 @@
 		    		FB.meta = { uid: data.authResponse.userID, accessToken: data.authResponse.accessToken };
 		    		$("#fb-me-pic").html("<img src='//graph.facebook.com/" + FB.meta.uid + "/picture' height='40' />");
 		    	} else {
-		    		FB.login(function (response) {
+		    		FB.login(function (data) {
 		    			if (response.authResponse) {
-
+		    				log.console(response);
+		    				FB.meta = { uid: data.authResponse.userID, accessToken: data.authResponse.accessToken };
 		    			} else {
 		    				FB.meta = { uid: 'anonymous', accessToken: 'none' };
 		    			}
