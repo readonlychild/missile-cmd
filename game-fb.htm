@@ -98,6 +98,14 @@
 		    	if (data.status == 'connected') {
 		    		FB.meta = { uid: data.authResponse.userID, accessToken: data.authResponse.accessToken };
 		    		$("#fb-me-pic").html("<img src='//graph.facebook.com/" + FB.meta.uid + "/picture' height='40' />");
+		    	} else {
+		    		FB.login(function (response) {
+		    			if (response.authResponse) {
+
+		    			} else {
+		    				FB.meta = { uid: 'anonymous', accessToken: 'none' };
+		    			}
+		    		});
 		    	}
 		    });
 		  });
@@ -126,10 +134,10 @@
 		initializeCities();
 		
         //initial screen messages
-        _textScrollers.push(new TextScroller({ text: "INSTRUCTIONS", fontSize:20, y:180, speed:40, waitFrames:120, waitAt:218, color:"#080" }));
-        _textScrollers.push(new TextScroller({ text: "Click 'Next Wave' below to get some donuts...", fontSize:26, y:220, speed:40, waitFrames:120, waitAt:10 }));
-        _textScrollers.push(new TextScroller({ text: "Click on the dark sky to fire at them :)", fontSize:16, y:250, speed:40, waitFrames:100, waitAt:140, color:"#f77" }));
-        _textScrollers.push(new TextScroller({ text: "Protect your Golems ", fontSize:13, y:270, speed:90, waitFrames:110, waitAt:160, color:"#a77" }));
+        _textScrollers.push(new TextScroller({ text: "INSTRUCTIONS", fontSize:20, y:180, speed:40, waitFrames:420, waitAt:218, color:"#080" }));
+        _textScrollers.push(new TextScroller({ text: "Click 'Next Wave' below to get some donuts...", fontSize:26, y:220, speed:40, waitFrames:720, waitAt:10 }));
+        _textScrollers.push(new TextScroller({ text: "Click on the dark sky to fire at them :)", fontSize:16, y:250, speed:40, waitFrames:600, waitAt:140, color:"#f77" }));
+        _textScrollers.push(new TextScroller({ text: "Protect your Golems ", fontSize:13, y:270, speed:90, waitFrames:410, waitAt:160, color:"#a77" }));
 		
 		$("#canvas-20").bind("mousemove", function (e) {
 			//console.log(e);
