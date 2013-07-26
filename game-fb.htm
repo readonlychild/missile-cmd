@@ -9,7 +9,7 @@
 </head>
 <body>
 	
-	<h3>Leaderboard</h3>
+	<!-- <h3>Leaderboard</h3>  -->
 	<div id="leaderboard-score"></div>
 
 	<!--<img src='resources/logo.png' style="float:left;" />-->
@@ -17,6 +17,8 @@
 		<canvas id="canvas-10" width="600" height="600" style="position:absolute;"></canvas>
 		<canvas id="canvas-20" width="600" height="600" style="position:absolute;"></canvas>
 	</div>
+
+	<div id="leaderboard-wave"></div>
 	<br/>
 	
 	<div style="width:800px;margin:0 auto;">
@@ -67,7 +69,7 @@
 	
 	$(document).ready(function () {
 		
-		//get leaderboard(s)
+		//get leaderboard(s) score
 		$.ajax({
 			url: "https://missile-cmd.herokuapp.com/leaderboard/missile-cmd.score",
 			type: "GET",
@@ -83,6 +85,25 @@
 				}
 				htm += "</ul>";
 				$("#leaderboard-score").html(htm);
+			}
+		});
+
+		//get leaderboard(s) waves
+		$.ajax({
+			url: "https://missile-cmd.herokuapp.com/leaderboard/missile-cmd.wave",
+			type: "GET",
+			success: function (data) {
+				var htm = "";
+				htm += "<ul class='leaderboard'>";
+				for (var i = 0, z = data.length; i < z; i++) {
+					htm += "<li>";
+					htm += "<img src='//graph.facebook.com/" + data[i].userId + "/picture' height='32' style='float:left;' />";
+					htm += "SCORE: " + data[i].score + "<br/>";
+					htm += "<span style='font-size:8pt;color:#ccc;'>" + data[i].created + "</span>";
+					htm += "</li>";
+				}
+				htm += "</ul>";
+				$("#leaderboard-wave").html(htm);
 			}
 		});
 
@@ -113,12 +134,7 @@
 
 		$("#action-postScore").bind("click", function () {
 			//alert('not implemented yet; refresh page to start again.');
-			$.ajax({
-				url: "https://missile-cmd.herokuapp.com/leaderboard/add/missile-cmd.score/" + FB.meta.uid + "/" + _gamevars.score,
-				type: 'GET',
-				success: function (data) { }
-			});
-			$(this).hide();
+			
 		});
 		
 		$("#action-powerup-explosion").bind("click", function () {
@@ -174,16 +190,31 @@
 		
 	});
 	
+	function postScores() {
+		$.ajax({
+			url: "https://missile-cmd.herokuapp.com/leaderboard/add/missile-cmd.score/" + FB.meta.uid + "/" + _gamevars.score,
+			type: 'GET',
+			success: function (data) { }
+		});
+		$.ajax({
+			url: "https://missile-cmd.herokuapp.com/leaderboard/add/missile-cmd.wave/" + FB.meta.uid + "/" + _gamevars.waveCount,
+			type: 'GET',
+			success: function (data) { }
+		});
+		$("#action-postScore").hide();
+	};
+
 	function gameLoop() {
 		if (_gamevars.gameover) {
 			$("#action-nextWave").hide();
-			$("#action-postScore").show();
+			//$("#action-postScore").show();
 			ctx.fillStyle = "#f72";
 			text(ctx, "GAME OVER", 225, 250, 54);
 			ctx.fillStyle = "#777";
 			text(ctx, "YOUR SCORE:", 250, 285, 24);
 			ctx.fillStyle = "#abd";
 			text(ctx, _gamevars.score, 436, 290, 44);
+			postScores();
 			return;
 		}
 		clearCanvas();
