@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css" />
     <link rel="stylesheet" href="style.css" />
 	<script type="text/javascript" src="jquery.hotkeys.js"></script>
+	<script type="text/javascript" src="moment.min.js"></script>
 </head>
 <body>
 	
@@ -80,7 +81,7 @@
 					htm += "<li>";
 					htm += "<img src='//graph.facebook.com/" + data[i].userId + "/picture' height='32' style='float:left;' />";
 					htm += "SCORE: " + data[i].score + "<br/>";
-					htm += "<span style='font-size:8pt;color:#ccc;'>" + data[i].created + "</span>";
+					htm += "<span style='font-size:8pt;color:#ccc;'>" + moment(data[i].created).fromNow() + "</span>";
 					htm += "</li>";
 				}
 				htm += "</ul>";
@@ -98,8 +99,8 @@
 				for (var i = 0, z = data.length; i < z; i++) {
 					htm += "<li>";
 					htm += "<img src='//graph.facebook.com/" + data[i].userId + "/picture' height='32' style='float:left;' />";
-					htm += "SCORE: " + data[i].score + "<br/>";
-					htm += "<span style='font-size:8pt;color:#ccc;'>" + data[i].created + "</span>";
+					htm += "WAVE: " + data[i].score + "<br/>";
+					htm += "<span style='font-size:8pt;color:#ccc;'>" + moment(data[i].created).fromNow() + "</span>";
 					htm += "</li>";
 				}
 				htm += "</ul>";
