@@ -5,4 +5,4 @@ body { font-family:arial; font-size:9pt; }
 .leaderboard { margin:0; padding:0; list-style:none; float:left; width:200px; }
 .leaderboard li { height:33px; }
 
-#game-div { background:url('resources/bg1.png') no-repeat 50% bottom;width:600px;height:600px;margin:0 0 0 200px; position:relative; }
+#game-div { background:url('resources/bg1.png') no-repeat 50% bottom; width:600px; height:600px; margin:0px; position:relative; float:left; }
