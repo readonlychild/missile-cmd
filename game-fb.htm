@@ -335,8 +335,36 @@
 		o.angleInfo = { x:1, y:1 };
 		o.update = function () {
 		
-		}
+		};
 		o.draw = function (ctx) {
+			ctx.strokeStyle = "#300";
+			lineTo(ctx, this.x, this.y, this.mouseInfo.x, this.mouseInfo.y);
+			ctx.save();
+			
+			var opp = Math.abs(this.y - this.mouseInfo.y);
+			var adj = Math.abs(this.x - this.mouseInfo.x);
+			
+			this.angleInfo.x = this.mouseInfo.x - this.x;
+			this.angleInfo.y = this.mouseInfo.y - this.y;
+			this.angleInfo.x *= 0.1;
+			this.angleInfo.y *= 0.1;
+			
+			var a = Math.atan(adj/opp); // 
+			if (this.x - this.mouseInfo.x > 0) {
+				opp = Math.abs(this.y - this.mouseInfo.y);
+				adj = Math.abs(this.x - this.mouseInfo.x);
+				a = Math.atan(opp/adj) - Math.PI*0.5;
+			}
+			ctx.translate(this.x, this.y);
+			ctx.rotate(a);
+			ctx.fillStyle = "#447";
+			//rect(ctx, -4, 10, 8, -30);
+			drawSpriteFrame(ctx, CANNON.resources.cannon, 1, 0, this.x, this.y, 0, 1);
+			ctx.restore();
+			
+			this.drawCrosshair(ctx);
+		};
+		o.drawx = function (ctx) {
 			ctx.strokeStyle = "#300";
 			lineTo(ctx, this.x, this.y, this.mouseInfo.x, this.mouseInfo.y);
 			ctx.save();
@@ -362,7 +390,7 @@
 			ctx.restore();
 			
 			this.drawCrosshair(ctx);
-		}
+		};
 		o.drawCrosshair = function (ctx) {
 			ctx.strokeStyle = "#840";
 			ctx.beginPath();
@@ -373,11 +401,11 @@
 			ctx.arc(this.mouseInfo.x, this.mouseInfo.y, 8, 0, Math.PI*2, true);
 			ctx.closePath();
 			ctx.stroke();
-		}
+		};
 		o.shoot = function (ctx) {
 			_bullets.push (new Bullet({ destination: { x: this.mouseInfo.x, y: this.mouseInfo.y } }));
 			_gamevars.score -= 1;
-		}
+		};
 		return o;
 	}
 	
@@ -609,6 +637,15 @@
 		*/
 	}
 	
+	var imgcannon = new Image();
+	imgcannon.src = "resources/cannon.png";
+	var CANNON = {
+		resources: {
+			cannon: imgcannon,
+			base: ""
+		}
+	};
+
 	var imgmissile0 = new Image();
 	imgmissile0.src = "resources/missile.png";
 	var MISSILE = {
@@ -619,13 +656,13 @@
 				}
 			]
 		}
-	}
+	};
 
 	var imgcityalive = new Image();
 	imgcityalive.onload = function () {
 		CITY.width = this.width;
 		CITY.height = this.height;
-	}
+	};
 	imgcityalive.src = "resources/city.png";
 	var imgcitydead  = new Image();
 	imgcitydead.src  = "resources/city-gone.png";
