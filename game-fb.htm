@@ -470,6 +470,7 @@
 		if (_currMissileColor >= _missileColors.length) _currMissileColor = 0;
 		return _missileColors[_currMissileColor];
 	}
+
 	//____________________MISSILE_______________
 	function Missile(c) {
 		var o = c || {};
@@ -503,8 +504,12 @@
 		}
 		o.draw = function (ctx) {
 			if (this.dead) return;
+			drawSpriteFrame(ctx, MISSILE.resources.types[0].image, 0, this.x, this.y, 0, 1);
+		}
+		o.drawx = function (ctx) {
+			if (this.dead) return;
 			ctx.strokeStyle = "#320";
-			lineTo(ctx, this.origin.x, this.origin.y, this.x, this.y);
+			//lineTo(ctx, this.origin.x, this.origin.y, this.x, this.y);
 			ctx.fillStyle = "#fb5";
 			circle(ctx, this.x, this.y, this.r);
 			ctx.fillStyle = "#000";
@@ -595,6 +600,18 @@
 		*/
 	}
 	
+	var imgmissile0 = new Image();
+	imgmissile0.src = "resources/missile.png";
+	var MISSILE = {
+		resources: {
+			types: [
+				{
+					image: imgmissile0
+				}
+			]
+		}
+	}
+
 	var imgcityalive = new Image();
 	imgcityalive.onload = function () {
 		CITY.width = this.width;
@@ -698,7 +715,25 @@
 		};
 		return o;
 	}
+
+	function loadResources () {
+
+	}
 	
+	function drawSpriteFrame (ctx, img, frameCount, currFrame, x, y, rotation, scale) {
+		var w = img.width / frameCount;
+		var h = img.height;
+
+		var sx = w * currFrame;
+
+		ctx.save();
+		ctx.translate(x, y);
+		ctx.rotate(rotation);
+		ctx.scale(scale, scale);
+		ctx.drawImage(img, sx, 0, w, h, -w/2, -h/2, w, y);
+		ctx.restore();
+	}
+
 </script>
 
 	
