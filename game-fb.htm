@@ -511,7 +511,7 @@
 				this.frameTicks = 0;
 				this.frame == 0 ? this.frame = 1 : this.frame = 0;
 			}
-			var angle = getAngle(this.x, this.y, this.x-this.speedX, this.y-this.speedY); 
+			var angle = getAngle(this.x, this.y, this.x-this.speedX * this.xdir, this.y-this.speedY); 
 			drawSpriteFrame(ctx, MISSILE.resources.types[0].image, 2, this.frame, this.x, this.y, angle, 1);
 			circle(ctx, this.x - this.speedX * 7 * this.xdir, this.y - this.speedY * 7, 2);
 		}
