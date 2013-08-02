@@ -504,13 +504,10 @@
 		}
 		o.draw = function (ctx) {
 			if (this.dead) return;
-			drawSpriteFrame(ctx, MISSILE.resources.types[0].image, 2, 0, this.x, this.y, 0, 1);
-			ctx.fillStyle = "#fb5";
-			circle(ctx, this.x, this.y, this.r);
-			ctx.fillStyle = "#000";
-			if (this.health >= 15) ctx.fillStyle = "#f00";
-			//if (this.health >= 20) ctx.fillStyle = "#fff";
-			circle(ctx, this.x, this.y, this.r-2);
+			this.frame = this.frame || 0;
+			this.frame == 0 ? 1 : 0;
+			drawSpriteFrame(ctx, MISSILE.resources.types[0].image, 2, this.frame, this.x, this.y, 0, 1);
+			circle(ctx, this.x - this.speedX * 7 * this.xdir, this.y - this.speedY * 7, 2);
 		}
 		o.drawx = function (ctx) {
 			if (this.dead) return;
