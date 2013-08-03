@@ -359,8 +359,9 @@
 			ctx.rotate(a);
 			ctx.fillStyle = "#447";
 			//rect(ctx, -4, 10, 8, -30);
-			drawSpriteFrame(ctx, CANNON.resources.cannon, 1, 0, 0, 0, 0, 1);
+			drawSpriteFrame(ctx, CANNON.resources.cannon, 1, 0, 0, 0, 0, 1, 0, -25);
 			ctx.restore();
+			drawSpriteFrame(ctx, CANNON.resources.base, 1, 0, this.x, this.y, 0, 1, 1, 15);
 			
 			this.drawCrosshair(ctx);
 		};
@@ -460,7 +461,8 @@
 	}
 	
 	//____________________EXPLOSION_______________
-	var _explosionColors = ["rgba(255,150,40,0.4)","rgba(255,90,0,0.4)","rgba(255,0,0,0.4)","rgba(255,240,0,0.4)","rgba(25,150,66,0.4)","rgba(110,0,0,0.4)"];
+	var _explosionColors = ["rgba(255,150,40,0.4)","rgba(255,90,0,0.4)","rgba(255,0,0,0.4)","rgba(255,240,0,0.4)","rgba(25,150,66,0.4)",
+							"rgba(110,0,0,0.4)"];
 	var _currExplosionColor = 0;
 	function Explosion(c) {
 		var o = c || {};
@@ -486,8 +488,10 @@
 		return o;
 	}
 	
-	var _missileColors = [ "rgba(255,150,40,0.4)","rgba(255,90,0,0.4)","rgba(255,0,0,0.4)","rgba(255,240,0,0.4)","rgba(25,150,66,0.4)","rgba(110,0,0,0.4)", 
-						   "rgba(255,90,40,0.4)","rgba(255,90,0,0.4)","rgba(255,0,130,0.4)","rgba(110,90,0,0.4)","rgba(77,99,66,0.4)","rgba(110,0,0,0.4)" 
+	var _missileColors = [ "rgba(255,150,40,0.4)","rgba(255,90,0,0.4)","rgba(255,0,0,0.4)",
+							"rgba(255,240,0,0.4)","rgba(25,150,66,0.4)","rgba(110,0,0,0.4)", 
+						   	"rgba(255,90,40,0.4)","rgba(255,90,0,0.4)","rgba(255,0,130,0.4)",
+						   	"rgba(110,90,0,0.4)","rgba(77,99,66,0.4)","rgba(110,0,0,0.4)" 
 						  ];
 	var _currMissileColor = 0;
 	var _currMissileColorDelay = 0;
@@ -639,10 +643,15 @@
 	
 	var imgcannon = new Image();
 	imgcannon.src = "resources/cannon.png";
+	var imgcannonbase = new Image();
+	imgcannonbase.src = "resources/base.png";
+	var imgexplosion = new Image();
+	imgexplosion.src = "resources/explosion.png";
 	var CANNON = {
 		resources: {
 			cannon: imgcannon,
-			base: ""
+			base: imgcannonbase,
+			explosion: imgexplosion
 		}
 	};
 
@@ -766,9 +775,11 @@
 
 	}
 	
-	function drawSpriteFrame (ctx, img, frameCount, currFrame, x, y, rotation, scale) {
+	function drawSpriteFrame (ctx, img, frameCount, currFrame, x, y, rotation, scale, xCenterOffset, yCenterOffset) {
 		var w = img.width / frameCount;
 		var h = img.height;
+		var xoff = xCenterOffset || 0;
+		var yoff = yCenterOffset || 0;
 
 		var sx = w * currFrame;
 
@@ -776,7 +787,7 @@
 		ctx.translate(x, y);
 		ctx.rotate(rotation);
 		ctx.scale(scale, scale);
-		ctx.drawImage(img, sx, 0, w, h, -w/2, -h/2, w, h);
+		ctx.drawImage(img, sx, 0, w, h, -w/2 + xoff, -h/2 + yoff, w, h);
 		ctx.restore();
 	}
 
