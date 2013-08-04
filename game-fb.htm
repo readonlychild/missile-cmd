@@ -587,7 +587,7 @@
 			var ball = {};
 			ball.x = Math.floor(Math.random() * WIDTH + 1);
 			ball.y = 0;
-			ball.speedY = 1;
+			ball.speedY = 1 + Math.random() * 0.5;
 			ball.speedX = Math.random()*2;
 			ball.xdir = (Math.random() > 0.5 ? 1 : -1);
 			ball.ydir = 1;
