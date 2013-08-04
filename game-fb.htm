@@ -480,6 +480,10 @@
 		}
 		o.draw = function (ctx) {
 			if (this.dead) return;
+			drawSpriteFrame(ctx, CANNON.resources.explosion, 1, 0, this.x, this.y, 0, this.r/40, 0, 0, 0.7);
+		}
+		o.drawx = function (ctx) {
+			if (this.dead) return;
 			_currExplosionColor++;
 			if(_currExplosionColor >= _explosionColors.length) _currExplosionColor = 0;
 			ctx.fillStyle = _explosionColors[_currExplosionColor];
@@ -775,11 +779,12 @@
 
 	}
 	
-	function drawSpriteFrame (ctx, img, frameCount, currFrame, x, y, rotation, scale, xCenterOffset, yCenterOffset) {
+	function drawSpriteFrame (ctx, img, frameCount, currFrame, x, y, rotation, scale, xCenterOffset, yCenterOffset, alpha) {
 		var w = img.width / frameCount;
 		var h = img.height;
 		var xoff = xCenterOffset || 0;
 		var yoff = yCenterOffset || 0;
+		alpha = alpha || 1;
 
 		var sx = w * currFrame;
 
@@ -787,6 +792,7 @@
 		ctx.translate(x, y);
 		ctx.rotate(rotation);
 		ctx.scale(scale, scale);
+		ctx.globalAlpha = alpha;
 		ctx.drawImage(img, sx, 0, w, h, -w/2 + xoff, -h/2 + yoff, w, h);
 		ctx.restore();
 	}
