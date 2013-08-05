@@ -6,3 +6,4 @@ body { font-family:arial; font-size:9pt; }
 .leaderboard li { height:33px; font-size:8pt; }
 
 #game-div { background:url('resources/bg1.png') no-repeat 50% bottom; width:600px; height:600px; margin:0px; position:relative; float:left; }
+#canvas-10 { background:url('resources/ground.png') no-repeat 50% bottom; }
