@@ -5,5 +5,14 @@ body { font-family:arial; font-size:9pt; }
 .leaderboard { margin:0; padding:0; list-style:none; float:left; width:140px; }
 .leaderboard li { height:33px; font-size:8pt; }
 
-#game-div { background:url('resources/bg1.png') no-repeat 50% bottom; width:600px; height:600px; margin:0px; position:relative; float:left; }
-#canvas-10 { background:url('resources/ground.png') no-repeat 50% bottom; }
+.game-layer { width:600px; height:600px; position:absolute; }
+
+#game-div { width:600px; height:600px; margin:0px; position:relative; float:left; }
+#canvas-10 { background:url('resources/Suelo.png') no-repeat 50% bottom; } 
+
+#bg-espacio   { background:url('resources/Cielo.png') no-repeat 50% bottom; } 
+#bg-suelo     { background:url('resources/Suelo.png') no-repeat 50% bottom; } 
+#bg-estrellas { background:url('resources/Estrellas.png') no-repeat 50% bottom; } 
+#bg-aurora    { background:url('resources/Aurora.png') no-repeat 50% bottom; } 
+#bg-nubes     { background:url('resources/Nubes.png') no-repeat 50% bottom; } 
+#bg-planeta   { background:url('resources/Planeta.png') no-repeat 50% bottom; } 

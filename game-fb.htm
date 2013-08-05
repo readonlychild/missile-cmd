@@ -15,8 +15,17 @@
 
 	<!--<img src='resources/logo.png' style="float:left;" />-->
 	<div id="game-div" style="">
+		
+		<div class="game-layer" id="bg-espacio"></div>
+		<div class="game-layer" id="bg-aurora"></div>
+		<div class="game-layer" id="bg-estrellas"></div>
+		<div class="game-layer" id="bg-suelo"></div>
+		<div class="game-layer" id="bg-planeta"></div>
+		<div class="game-layer" id="bg-nubes"></div>
+		
 		<canvas id="canvas-10" width="600" height="600" style="position:absolute;"></canvas>
 		<canvas id="canvas-20" width="600" height="600" style="position:absolute;"></canvas>
+		
 	</div>
 
 	<div id="leaderboard-wave"></div>
@@ -313,11 +322,7 @@
 		ctx.fillStyle = "#fff";
 		text(ctx, "SCORE: " + _gamevars.score, 20, 20);
 
-		var parallaxNumber = (Math.round((WIDTH/2 - player.mouseInfo.x) * 100 / (WIDTH/2)) * 1 - 100) / 1;
-		text(ctx, "m.x: " + parallaxNumber, 20, 33);
-
-		$("#game-div").css("background-position", parallaxNumber + "px bottom");
-
+		
 	}
 	
 	function updateUI() {
@@ -326,6 +331,14 @@
 			$("#action-powerup-explosion").show();
             //_textScrollers.push(new TextScroller({ text: "Explosion PowerUp available (x4)", fontSize:12, y:270, speed:70, waitFrames:40, waitAt:500, color:"#531" }));
 		}
+
+		var parallaxNumber = (Math.round((WIDTH/2 - player.mouseInfo.x) * 100 / (WIDTH/2)) * 1 - 100);
+		//text(ctx, "m.x: " + parallaxNumber, 20, 33);
+
+		$("#bg-nubes").css("background-position", (parallaxNumber /4 ) + "px bottom");
+		$("#bg-estrellas").css("background-position", (parallaxNumber /10 ) + "px bottom");
+		$("#bg-aurora").css("background-position", (parallaxNumber /15 ) + "px bottom");
+		$("#bg-planeta").css("background-position", (parallaxNumber /20 ) + "px bottom");
 	}
 	
 </script>
