@@ -24,10 +24,14 @@
 		<div class="game-layer" id="bg-nubes"></div>
 		
 		<canvas id="canvas-10" width="600" height="600" style="position:absolute;"></canvas>
+		<div class="layer-dash" id="bg-dashboard">
+		</div>
 		<canvas id="canvas-20" width="600" height="600" style="position:absolute;"></canvas>
 
-		<div class="" id="bg-dashboard">
-			<span id="btn-nw" ></span>
+		<div class="layer-dash">
+			<div style="padding:5px;">
+				<span id="btn-nw" ></span>
+			</div>
 		</div>
 		
 	</div>
@@ -324,7 +328,7 @@
 		});
 		
 		ctx.fillStyle = "#fff";
-		text(ctx, "" + _gamevars.score, 132, 54);
+		text(ctx, "" + _gamevars.score, 132, 24);
 
 		
 	}
