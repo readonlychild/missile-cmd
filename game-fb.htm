@@ -25,6 +25,10 @@
 		
 		<canvas id="canvas-10" width="600" height="600" style="position:absolute;"></canvas>
 		<canvas id="canvas-20" width="600" height="600" style="position:absolute;"></canvas>
+
+		<div class="" id="bg-dashboard">
+			<span id="btn-nw" ></span>
+		</div>
 		
 	</div>
 
@@ -176,7 +180,7 @@
 			player.shoot(ctx);
 		});
 		
-		$("#action-nextWave").bind("click", function () {
+		$("#action-nextWave, #btn-nw").bind("click", function () {
 			_gamevars.waveCount++;
 			_gamevars.score += 200;
 			var missiles = 4 + Math.floor(_gamevars.waveCount / 9);
@@ -320,7 +324,7 @@
 		});
 		
 		ctx.fillStyle = "#fff";
-		text(ctx, "SCORE: " + _gamevars.score, 20, 20);
+		text(ctx, "" + _gamevars.score, 132, 54);
 
 		
 	}

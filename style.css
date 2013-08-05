@@ -16,3 +16,7 @@ body { font-family:arial; font-size:9pt; }
 #bg-aurora    { background:url('resources/Aurora.png') no-repeat 50% bottom; } 
 #bg-nubes     { background:url('resources/Nubes.png') no-repeat 50% bottom; } 
 #bg-planeta   { background:url('resources/Planeta.png') no-repeat 50% bottom; } 
+#bg-dashboard { background:url('resources/dash.png') no-repeat 50% 0; text-align:right; width:590px; height:34px; padding:5px; position:absolute; } 
+
+#btn-nw { cursor:pointer; width:101px; height:31px; display:inline-block; background:url('resources/btn-nextWave.png') no-repeat; }
+#btn-nw:hover { background:url('resources/btn-nextWave-over.png') no-repeat; }
