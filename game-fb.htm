@@ -12,7 +12,10 @@
 <body>
 	<div style="width:890px; margin:0 auto;">
 	<!-- <h3>Leaderboard</h3>  -->
-	<div id="leaderboard-score"></div>
+	<div id="leaderboard-score">
+		<div id="score-top"></div>
+		<div id="score-recent"></div>
+	</div>
 
 	<!--<img src='resources/logo.png' style="float:left;" />-->
 	<div id="game-div" style="">
@@ -122,7 +125,24 @@
 					htm += "</li>";
 				}
 				htm += "</ul>";
-				$("#leaderboard-score").html(htm);
+				$("#score-top").html(htm);
+			}
+		});
+		$.ajax({
+			url: "https://missile-cmd.herokuapp.com/leaderboard/recent/missile-cmd.score",
+			type: "GET",
+			success: function (data) {
+				var htm = "";
+				htm += "<ul class='leaderboard'>";
+				for (var i = 0, z = data.length; i < z; i++) {
+					htm += "<li>";
+					htm += "<img src='//graph.facebook.com/" + data[i].userId + "/picture' height='32' style='float:left;' />";
+					htm += "SCORE: " + data[i].score + "<br/>";
+					htm += "<span style='font-size:8pt;color:#ccc;'>" + moment(data[i].created).fromNow() + "</span>";
+					htm += "</li>";
+				}
+				htm += "</ul>";
+				$("#score-recent").html(htm);
 			}
 		});
 
