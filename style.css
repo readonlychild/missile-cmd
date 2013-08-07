@@ -6,7 +6,7 @@ body { font-family:arial; font-size:9pt; }
 .leaderboard li { height:33px; font-size:8pt; }
 
 .game-layer { width:600px; height:600px; position:absolute; }
-.layer-dash { width:600px; height:44px;  position:absolute; text-align:right; }
+.layer-dash { width:600px; height:21px;  position:absolute; border:0px solid #f72; }
 
 #game-div { width:600px; height:600px; margin:0px; position:relative; float:left; }
 #canvas-10 { background:url('resources/Suelo.png') no-repeat 50% bottom; } 
@@ -19,5 +19,11 @@ body { font-family:arial; font-size:9pt; }
 #bg-planeta   { background:url('resources/Planeta.png') no-repeat 50% bottom; } 
 #bg-dashboard { background:url('resources/dash.png') no-repeat 50% 0; } 
 
+#dash-buttons { display:inline-block; float:right; position:relative; }
+
 #btn-nw { cursor:pointer; width:101px; height:31px; display:inline-block; background:url('resources/btn-nextWave.png') no-repeat; }
 #btn-nw:hover { background:url('resources/btn-nextWave-over.png') no-repeat; }
+
+.dash-powerup { display:inline-block; width:32px; height:32px; background:url('resources/powerup.png') no-repeat; cursor:pointer; }
+.dash-powerup.explosionsx4    { background:url('resources/powerup-explosionsx4-off.png') no-repeat; }
+.dash-powerup.explosionsx4.on { background:url('resources/powerup-explosionsx4.png') no-repeat; }
