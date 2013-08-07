@@ -392,9 +392,11 @@
 		
 		};
 		o.draw = function (ctx) {
-			ctx.strokeStyle = "#300";
-			lineTo(ctx, this.x, this.y, this.mouseInfo.x, this.mouseInfo.y);
+			ctx.strokeStyle = "#000";
 			ctx.save();
+			
+			ctx.globalAlpha = 0.10;
+			lineTo(ctx, this.x, this.y, this.mouseInfo.x, this.mouseInfo.y);
 			
 			var opp = Math.abs(this.y - this.mouseInfo.y);
 			var adj = Math.abs(this.x - this.mouseInfo.x);
