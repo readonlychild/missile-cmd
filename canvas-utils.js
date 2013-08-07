@@ -37,3 +37,22 @@ function getWidth(ctx) {
 function getHeight(ctx) {
 	return ctx.canvas.height;
 }
+function pizzaTimer (ctx, cx, cy, r, startPercent, endPercent, lnWidth, gradShift, color) {
+  lnWidth = lnWidth || 5;
+  gradShift = gradShift || 0;
+  color = color || "#f72";
+  ctx.strokeStyle = color;
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, Math.PI*2 * ((startPercent-gradShift)/100), Math.PI*2 * ((100-endPercent-gradShift)/100), true);
+  ctx.lineWidth = lnWidth;
+
+  var tmpShadowBlur = ctx.shadowBlur;
+  var tmpShadowColor = ctx.shadowColor;
+
+  ctx.shadowBlur = 20;
+  ctx.shadowColor = color;
+  ctx.stroke();
+
+  ctx.shadowBlur = tmpShadowBlur;
+  ctx.shadowColor = tmpShadowColor;
+};

@@ -45,6 +45,16 @@ app.get('/leaderboard/add/:board/:userId/:score', function (req, res) {
 	res.end(':D finished add-api!');
 });
 
+app.get('/leaderboard/recent/:code', function (req, res) {
+
+	leaderboard.getRecent(req.params.code, function (data) {
+		res.writeHead(200, {"Content-Type": "application/json"});
+		res.write(JSON.stringify(data));
+		res.end();
+	});
+
+});
+
 app.get('/leaderboard/:code', function (req, res) {
 
 	leaderboard.getLeaders(req.params.code, function (data) {

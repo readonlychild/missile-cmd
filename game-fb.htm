@@ -48,11 +48,10 @@
 	<div style="width:600px;margin:0 140px;">
 		<div style="clear:both;" ></div>
         <div class="actionbar ui-corner-all">
-            <span class="btn ui-corner-all" id="action-nextWave">Next Wave</span> 
 			<span class="btn ui-corner-all powerup" id="action-powerup-explosion">explosion x4</span> 
 			<span class="btn ui-corner-all" id="action-postScore" style="display:none;">Post Score to Leaderboard</span>
         </div>
-        waveCount: <span id="lbl-waveCount">0</span>  | 
+        waveCount: <span data-bind="text: wave"></span>  | 
         donutHealth: <span id="lbl-missileHealth">?</span>  | 
 		explosionRadius: <span id="lbl-explosionRadius">?</span>  | 
 	</div>
@@ -177,7 +176,7 @@
 		});
 		
 		$("#action-powerup-explosion, #powerup-ex4").bind("click", function () {
-			_powerups.push(new PowerUp({ ttl: { original:700, value:700 }, pointValue:_explosions4pointMark, enhance:4 }));
+			_powerups.push(new ExplosionPowerUp({ pointValue:_explosions4pointMark, enhance:4 }));
 		});
 		
 		ctx = document.getElementById("canvas-20").getContext("2d");
@@ -205,16 +204,17 @@
 			player.shoot(ctx);
 		});
 		
-		$("#action-nextWave, #btn-nw").bind("click", function () {
+		$("#btn-nw").bind("click", function () {
 			_gamevars.waveCount++;
 			_gamevars.score += 200;
 			vm.score(_gamevars.score);
+			vm.wave(_gamevars.waveCount);
 			var missiles = 4 + Math.floor(_gamevars.waveCount / 9);
 			if (_gamevars.waveCount % 3 == 0) {
 				_gamevars.missile.health += 2;
 			}
 			newWave(missiles, _gamevars.missile.health, _gamevars.missile.radius);
-			$("#lbl-waveCount").text(_gamevars.waveCount);
+			//$("#lbl-waveCount").text(_gamevars.waveCount);
 			$("#lbl-missileHealth").text(_gamevars.missile.health);
 			$("#lbl-explosionRadius").text(_gamevars.explosion.radius);
 			_gamevars.explosion.radius -= 2;
@@ -248,7 +248,7 @@
 
 	function gameLoop() {
 		if (_gamevars.gameover) {
-			$("#action-nextWave").hide();
+			$("#btn-nw").hide();
 			//$("#action-postScore").show();
 			ctx.fillStyle = "#f72";
 			text(ctx, "GAME OVER", 225, 250, 54);
@@ -354,7 +354,8 @@
 		ctx.fillStyle = "#ffa";
 		//text(ctx, "" + _gamevars.score, 182, 15, 13);
 		text(ctx, "" + vm.score(), 182, 15, 13);
-		text(ctx, "" + _gamevars.waveCount, 92, 15, 13);
+		//text(ctx, "" + _gamevars.waveCount, 92, 15, 13);
+		text(ctx, "" + vm.wave(), 92, 15, 13);
 		
 	}
 	
@@ -810,35 +811,47 @@
 			text2(ctx, this.text, this.x, this.y, this.fontSize);
 		};
 		return o;
-	}
+	};
 	
 	function PowerUp(c) {
+		var o = c || {};
+		o.code = c.code || "?";
+		o.dead = true;
+		o.pointValue = c.pointValue || 0;
+		o.ttl = c.ttl || { original: 1000, value: 1000 };
+		o.update = function () {
+			
+		};
+		o.draw = function (ctx) {
+			
+		};
+		return o;
+	};
+	function ExplosionPowerUp(c) {
 		var o = c || {};
 		o.code = c.code || "explosion-multiply";
 		o.dead = false;
 		o.pointValue = c.pointValue || 0;
 		_gamevars.score -= o.pointValue;
 		vm.score(_gamevars.score);
-		if (o.code == "explosion-multiply") _gamevars.powerUps.explosion.multiply = c.enhance || 2;
-		o.ttl = c.ttl || { original: 1000, value: 1000 };
+		_gamevars.powerUps.explosion.multiply = c.enhance || 2;
+		o.ttl = c.ttl || { original: 700, value: 700 };
 		o.update = function () {
 			this.ttl.value -= 1;
 			if (this.ttl.value <= 0) {
 				this.dead = true;
-				if (o.code == "explosion-multiply") _gamevars.powerUps.explosion.multiply = 1;
+				_gamevars.powerUps.explosion.multiply = 1;
 			}
 		};
 		o.draw = function (ctx) {
 			var p = this.ttl.value *100 / this.ttl.original;
 			ctx.fillStyle = "#900";
-			rect(ctx, WIDTH/2-50, HEIGHT-10, p, 2);
+			//rect(ctx, WIDTH/2-50, HEIGHT-10, p, 2);
+			pizzaTimer(ctx, 472, 48, 7, 0, p, 14, 25);
 		};
 		return o;
-	}
+	};
 
-	function loadResources () {
-
-	}
 	
 	function drawSpriteFrame (ctx, img, frameCount, currFrame, x, y, rotation, scale, xCenterOffset, yCenterOffset, alpha) {
 		var w = img.width / frameCount;
@@ -856,12 +869,14 @@
 		ctx.globalAlpha = alpha;
 		ctx.drawImage(img, sx, 0, w, h, -w/2 + xoff, -h/2 + yoff, w, h);
 		ctx.restore();
-	}
+	};
 
 	function getAngle (x1, y1, x2, y2) {
 		var a = Math.atan2(x2-x1, y1-y2);
 		return a;
 	}
+
+
 
 </script>
 

@@ -25,10 +25,10 @@ exports.getLeaders = function (boardCode, callback) {
 		method: 'GET',
 		path: p
 	};
-	console.log('getLeaders>', options.hostname, p);
+	//console.log('getLeaders>', options.hostname, p);
 	var responseText = '';
 	var req = https.request(options, function (res) {
-		console.log('requesting.h1>');
+		//console.log('requesting.h1>');
 		res.on('data', function (chunk) {
 			responseText += chunk;
 		});
@@ -38,11 +38,34 @@ exports.getLeaders = function (boardCode, callback) {
 		});
 	});
 	req.on('error', function (e) {
-		console.log('req.err>', e);
+		console.log('getLeaders.req.err>', e);
 	});
 	req.end();
 };
 
+exports.getRecent = function (boardCode, callback) {
+	var bcode = boardCode || _context.appCode;
+	var p = _context.serverPath + '?apiKey=' + _context._apikey;
+	p += "&q={appCode:\"" + bcode + "\"}&s={created:-1}&l=5";
+	var options = {
+		hostname: _context.serverHost,
+		host: _context.serverHost,
+		method: 'GET',
+		path: p
+	};
+	var responseText = '';
+	var req = https.request(options, function (res) {
+		res.on('data', function (chunk) {
+			responseText += chunk;
+		});
+		res.on('end', function () {
+			if (callback) callback(JSON.parse(responseText));
+		});
+	});
+	req.on('error', function (e) {
+		console.log('getRecent.req.err>', e);
+	});
+};
 
 exports.addEntry = function (entry, callback) {
 
