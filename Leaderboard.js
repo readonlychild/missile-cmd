@@ -65,6 +65,7 @@ exports.getRecent = function (boardCode, callback) {
 	req.on('error', function (e) {
 		console.log('getRecent.req.err>', e);
 	});
+	req.end();
 };
 
 exports.addEntry = function (entry, callback) {
