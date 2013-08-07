@@ -2,7 +2,7 @@ body { font-family:arial; font-size:9pt; }
 .actionbar { border:1px solid #ccc; background-color:#eee; padding:5px 10px; }
 .btn { background-color:#666; color:#fff; padding:3px 5px; display:inline-block; cursor:pointer; }
 
-.leaderboard { margin:0; padding:0; list-style:none; float:left; width:140px; }
+.leaderboard { margin:0; padding:0; list-style:none; width:140px; }
 .leaderboard li { height:33px; font-size:8pt; }
 
 .game-layer { width:600px; height:600px; position:absolute; }
