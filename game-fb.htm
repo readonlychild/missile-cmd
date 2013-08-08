@@ -12,7 +12,7 @@
 <body>
 	<div style="width:890px; margin:0 auto;">
 	<!-- <h3>Leaderboard</h3>  -->
-	<div id="leaderboard-score" style="float:left;">
+	<div id="leaderboard-score" style="float:left;width:140px;">
 		Top Scores
 		<div id="score-top"></div>
 		Recent Plays
@@ -20,6 +20,7 @@
 	</div>
 
 	<!--<img src='resources/logo.png' style="float:left;" />-->
+	
 	<div id="game-div" style="">
 		
 		<div class="game-layer" id="bg-espacio"></div>
@@ -37,22 +38,19 @@
 		
 		<div class="" id="dash-buttons">
 			<div style="padding:5px;">
-				<span class="dash-powerup"></span>
-				<span class="dash-powerup"></span>
-				<span class="dash-powerup"></span>
-				<span class="dash-powerup explosionsx4" id="powerup-ex4"></span>
 				<span id="btn-nw" ></span>
 			</div>
 		</div>
 		
 	</div>
 
-	<div id="leaderboard-wave" style="float:left;"></div>
+	<div id="leaderboard-wave" style="float:left;width:140px;"></div>
 	<br/>
 	
 	<div style="width:600px;margin:0 140px;">
 		<div style="clear:both;" ></div>
-        <div class="actionbar ui-corner-all">
+        <div class="actionbar" style="position:relative;">
+        	<span class="dash-powerup explosionsx4" id="powerup-ex4"></span>
 			<span class="btn ui-corner-all powerup" id="action-powerup-explosion">explosion x4</span> 
 			<span class="btn ui-corner-all" id="action-postScore" style="display:none;">Post Score to Leaderboard</span>
         </div>
@@ -869,7 +867,7 @@
 			var p = this.ttl.value *100 / this.ttl.original;
 			ctx.fillStyle = "#900";
 			//rect(ctx, WIDTH/2-50, HEIGHT-10, p, 2);
-			pizzaTimer(ctx, 472, 48, 7, 0, p, 14, 25);
+			pizzaTimer(ctx, 238, 582, 7, 0, p, 14, 25, "#0a0");
 		};
 		return o;
 	};
