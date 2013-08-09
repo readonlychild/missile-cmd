@@ -1,5 +1,5 @@
 body { font-family:arial; font-size:9pt; }
-.actionbar { border:1px solid #ccc; background-color:#eee; padding:5px 10px; }
+.actionbar { border:0px solid #ccc; background-color:#000; padding:0; height:32px; }
 .btn { background-color:#666; color:#fff; padding:3px 5px; display:inline-block; cursor:pointer; }
 
 .leaderboard { margin:0; padding:0; list-style:none; width:140px; }
@@ -24,6 +24,6 @@ body { font-family:arial; font-size:9pt; }
 #btn-nw { cursor:pointer; width:101px; height:31px; display:inline-block; background:url('resources/btn-nextWave.png') no-repeat; }
 #btn-nw:hover { background:url('resources/btn-nextWave-over.png') no-repeat; }
 
-.dash-powerup { display:inline-block; width:32px; height:32px; background:url('resources/powerup.png') no-repeat; cursor:pointer; }
-.dash-powerup.explosionsx4    { background:url('resources/powerup-explosionsx4-off.png') no-repeat; }
+.dash-powerup { display:inline-block; width:34px; height:32px; background:url('resources/powerup.png') no-repeat; cursor:pointer; position:absolute; }
+.dash-powerup.explosionsx4    { background:url('resources/powerup-explosionsx4-off.png') no-repeat; left:221px; }
 .dash-powerup.explosionsx4.on { background:url('resources/powerup-explosionsx4.png') no-repeat; }

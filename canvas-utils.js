@@ -40,7 +40,7 @@ function getHeight(ctx) {
 function pizzaTimer (ctx, cx, cy, r, startPercent, endPercent, lnWidth, gradShift, color) {
   lnWidth = lnWidth || 5;
   gradShift = gradShift || 0;
-  color = color || "#f72";
+  color = color || "#f52";
   ctx.strokeStyle = color;
   ctx.beginPath();
   ctx.arc(cx, cy, r, Math.PI*2 * ((startPercent-gradShift)/100), Math.PI*2 * ((100-endPercent-gradShift)/100), true);
