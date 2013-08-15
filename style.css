@@ -1,5 +1,5 @@
 body { font-family:arial; font-size:9pt; }
-.actionbar { border:0px solid #ccc; background-color:#000; padding:0; height:32px; }
+.actionbar { border:0px solid #ccc; background:url('resources/bg-dash-buttons.png') no-repeat 50% 0; padding:0; height:34px; }
 .btn { background-color:#666; color:#fff; padding:3px 5px; display:inline-block; cursor:pointer; }
 
 .leaderboard { margin:0; padding:0; list-style:none; width:140px; }
@@ -18,12 +18,13 @@ body { font-family:arial; font-size:9pt; }
 #bg-nubes     { background:url('resources/Nubes.png') no-repeat 50% bottom; } 
 #bg-planeta   { background:url('resources/Planeta.png') no-repeat 50% bottom; } 
 #bg-dashboard { background:url('resources/dash.png') no-repeat 50% 0; } 
+#bg-dash-botm { background:url('resources/dash-bottom.png') no-repeat 50% bottom; width:600px; height:600px; position:absolute; } 
 
 #dash-buttons { display:inline-block; float:right; position:relative; }
 
 #btn-nw { cursor:pointer; width:101px; height:31px; display:inline-block; background:url('resources/btn-nextWave.png') no-repeat; }
 #btn-nw:hover { background:url('resources/btn-nextWave-over.png') no-repeat; }
 
-.dash-powerup { display:inline-block; width:34px; height:32px; background:url('resources/powerup.png') no-repeat; cursor:pointer; position:absolute; }
-.dash-powerup.explosionsx4    { background:url('resources/powerup-explosionsx4-off.png') no-repeat; left:221px; }
+.dash-powerup { display:inline-block; width:50px; height:34px; background:url('resources/powerup.png') no-repeat; cursor:pointer; position:absolute; }
+.dash-powerup.explosionsx4    { background:url('resources/powerup-explosionsx4-off.png') no-repeat; left:360px; }
 .dash-powerup.explosionsx4.on { background:url('resources/powerup-explosionsx4.png') no-repeat; }

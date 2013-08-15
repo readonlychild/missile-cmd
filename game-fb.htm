@@ -27,14 +27,19 @@
 		<div class="game-layer" id="bg-aurora"></div>
 		<div class="game-layer" id="bg-estrellas"></div>
 		<div class="game-layer" id="bg-suelo"></div>
+
 		<div class="game-layer" id="bg-planeta"></div>
 		<div class="game-layer" id="bg-nubes"></div>
 		
-		<canvas id="canvas-10" width="600" height="600" style="position:absolute;"></canvas>
+		
+
+		<canvas id="canvas-ctx" width="600" height="600" style="position:absolute;"></canvas>
+		<div class="" id="bg-dash-botm" style=""></div>
 		<div class="layer-dash" id="bg-dashboard">
 			<img src="resources/dash-icon.png" />
 		</div>
-		<canvas id="canvas-20" width="600" height="600" style="position:absolute;"></canvas>
+
+		<canvas id="ctxCities" width="600" height="600" style="position:absolute;"></canvas>
 		
 		<div class="" id="dash-buttons">
 			<div style="padding:5px;">
@@ -71,6 +76,8 @@
 		var o = {};
 		o.score = ko.observable(0);
 		o.wave = ko.observable(0);
+		o.bulletsShot = ko.observable(0);
+		o.missilesKilled = ko.observable(0);
 		return o;
 	};
 
@@ -199,8 +206,8 @@
 			_powerups.push(new ExplosionPowerUp({ pointValue:_explosions4pointMark, enhance:4 }));
 		});
 		
-		ctx = document.getElementById("canvas-20").getContext("2d");
-		ctxCities = document.getElementById("canvas-10").getContext("2d");
+		ctx = document.getElementById("canvas-ctx").getContext("2d");
+		ctxCities = document.getElementById("ctxCities").getContext("2d");
 		WIDTH = ctx.canvas.width;
 		HEIGHT = ctx.canvas.height;
 		
@@ -214,14 +221,15 @@
         _textScrollers.push(new TextScroller({ text: "Click on the dark sky to fire at them :)", fontSize:16, y:250, speed:40, waitFrames:600, waitAt:140, color:"#f77" }));
         _textScrollers.push(new TextScroller({ text: "Protect your Golems ", fontSize:13, y:270, speed:90, waitFrames:410, waitAt:160, color:"#a77" }));
 		
-		$("#canvas-20").bind("mousemove", function (e) {
+		$("#ctxCities").bind("mousemove", function (e) {
 			//console.log(e);
 			player.mouseInfo.x = e.offsetX;
 			player.mouseInfo.y = e.offsetY;
 		});
 		
-		$("#canvas-20").bind("click", function () {
+		$("#ctxCities").bind("click", function () {
 			player.shoot(ctx);
+			vm.bulletsShot(vm.bulletsShot()+1);
 		});
 		
 		$("#btn-nw").bind("click", function () {
@@ -346,9 +354,7 @@
 		if (_gamevars.gameover) return;
 		player.draw(ctx);
 		
-		_powerups.forEach(function (power) {
-			power.draw(ctxCities);
-		});
+		
 		
 		_missiles.forEach(function (missile) {
 			missile.draw(ctx);
@@ -371,11 +377,17 @@
 			scroller.draw(ctxCities);
 		});
 		
-		ctx.fillStyle = "#ffa";
+		_powerups.forEach(function (power) {
+			power.draw(ctxCities);
+		});
+
+		ctxCities.fillStyle = "#ffa";
 		//text(ctx, "" + _gamevars.score, 182, 15, 13);
-		text(ctx, "" + vm.score(), 182, 15, 13);
+		text(ctxCities, "" + vm.score(), 182, 15, 13);
 		//text(ctx, "" + _gamevars.waveCount, 92, 15, 13);
-		text(ctx, "" + vm.wave(), 92, 15, 13);
+		text(ctxCities, "" + vm.wave(), 92, 15, 13);
+		text(ctxCities, "" + vm.bulletsShot(), 92, 596, 13);
+		text(ctxCities, "" + vm.missilesKilled(), 492, 596, 13);
 		
 	}
 	
@@ -599,7 +611,10 @@
 		o.update = function () {
 			this.x += this.speedX * this.xdir;
 			this.y += this.speedY * this.ydir;
-			if (this.health <= 0) this.dead = true;
+			if (this.health <= 0) {
+				this.dead = true;
+				vm.missilesKilled(vm.missilesKilled()+1);
+			}
 			
 			if (this.x >= WIDTH) {
 				this.xdir = -1; this.origin.y = this.y; this.origin.x = this.x; 
@@ -866,8 +881,8 @@
 		o.draw = function (ctx) {
 			var p = this.ttl.value *100 / this.ttl.original;
 			ctx.fillStyle = "#900";
-			//rect(ctx, WIDTH/2-50, HEIGHT-10, p, 2);
-			pizzaTimer(ctx, 238, 582, 7, 0, p, 14, 25, "#0a0");
+			//rect(ctx,  WIDTH/2-50, HEIGHT-10, p, 2);
+			pizzaTimer(ctx, 355, 581, 6, 0, p, 12, 25, "#0a0");
 		};
 		return o;
 	};
