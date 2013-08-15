@@ -216,10 +216,10 @@
 		initializeCities();
 		
         //initial screen messages
-        _textScrollers.push(new TextScroller({ text: "INSTRUCTIONS", fontSize:20, y:180, speed:40, waitFrames:420, waitAt:218, color:"#080" }));
-        _textScrollers.push(new TextScroller({ text: "Click 'Next Wave' below to get some donuts...", fontSize:26, y:220, speed:40, waitFrames:720, waitAt:10 }));
-        _textScrollers.push(new TextScroller({ text: "Click on the dark sky to fire at them :)", fontSize:16, y:250, speed:40, waitFrames:600, waitAt:140, color:"#f77" }));
-        _textScrollers.push(new TextScroller({ text: "Protect your Golems ", fontSize:13, y:270, speed:90, waitFrames:410, waitAt:160, color:"#a77" }));
+        _textScrollers.push(new TextScroller({ text: "INSTRUCTIONS", fontSize:20, y:180, speed:40, waitFrames:420, waitAt:200, color:"#080" }));
+        _textScrollers.push(new TextScroller({ text: "Click 'Next Wave' on top to release missiles...", fontSize:26, y:220, speed:40, waitFrames:720, waitAt:10 }));
+        _textScrollers.push(new TextScroller({ text: "Click on the sky to fire at them :)", fontSize:16, y:250, speed:40, waitFrames:600, waitAt:164, color:"#f77" }));
+        _textScrollers.push(new TextScroller({ text: "Protect your cities ", fontSize:13, y:270, speed:90, waitFrames:410, waitAt:180, color:"#a77" }));
 		
 		$("#ctxCities").bind("mousemove", function (e) {
 			//console.log(e);
@@ -248,7 +248,7 @@
 			_gamevars.explosion.radius -= 2;
 			if (_gamevars.explosion.radius < 40) _gamevars.explosion.radius = 40;
 			
-			_textScrollers.push(new TextScroller({ text: "Wave "+_gamevars.waveCount, fontSize:32, y:520, speed:40 }));
+			_textScrollers.push(new TextScroller({ text: "Wave "+_gamevars.waveCount, fontSize:32, y:500, speed:40 }));
 			
 		});
 		
@@ -279,11 +279,15 @@
 			$("#btn-nw").hide();
 			//$("#action-postScore").show();
 			ctx.fillStyle = "#f72";
-			text(ctx, "GAME OVER", 225, 250, 54);
+			text(ctx, "GAME OVER", 135, 250, 54);
 			ctx.fillStyle = "#777";
-			text(ctx, "YOUR SCORE:", 250, 285, 24);
+			text(ctx, "YOUR SCORE:", 163, 285, 24);
 			ctx.fillStyle = "#abd";
-			text(ctx, _gamevars.score, 436, 290, 44);
+			text(ctx, _gamevars.score, 336, 290, 44);
+			ctx.fillStyle = "#abd";
+			text(ctx, "SPECIAL THANKS TO", 162, 460, 12);
+			text(ctx, "MARIO ROCCHI", 300, 462, 20);
+			text(ctx, "for contributing the awesome artwork :D", 180, 480, 15);
 			postScores();
 			return;
 		}
@@ -707,7 +711,7 @@
 				if (city.isAlive && collides(city, missile)) {
 					city.isAlive = false;
 					_explosions.push(new Explosion({ x: city.x + city.width/2, y: city.y + city.height/2, r: 80 }));
-                    _textScrollers.push(new TextScroller({ text: "Golem down :( ", fontSize:48, y:400, speed:60, waitAt:90, color:"#333", waitFrames:40 }));
+                    _textScrollers.push(new TextScroller({ text: "Lost City :( ", fontSize:48, y:400, speed:60, waitAt:90, color:"#333", waitFrames:40 }));
 				}
 			});
 		});
