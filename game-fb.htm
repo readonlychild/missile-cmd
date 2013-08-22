@@ -55,6 +55,7 @@
 	<div style="width:600px;margin:0 140px;">
 		<div style="clear:both;" ></div>
         <div class="actionbar" style="position:relative;">
+        	<span class="dash-powerup clusterbomb"  id="powerup-cluster"></span>
         	<span class="dash-powerup explosionsx4" id="powerup-ex4"></span>
 			<span class="btn ui-corner-all powerup" id="action-powerup-explosion">explosion x4</span> 
 			<span class="btn ui-corner-all" id="action-postScore" style="display:none;">Post Score to Leaderboard</span>
@@ -204,6 +205,10 @@
 		
 		$("#action-powerup-explosion, #powerup-ex4").bind("click", function () {
 			_powerups.push(new ExplosionPowerUp({ pointValue:_explosions4pointMark, enhance:4 }));
+		});
+
+		$("#powerup-cluster").bind("click", function () {
+			_powerups.push(new ClusterBombPowerUp({  }));
 		});
 		
 		ctx = document.getElementById("canvas-ctx").getContext("2d");
@@ -863,6 +868,29 @@
 		};
 		o.draw = function (ctx) {
 			
+		};
+		return o;
+	};
+	function ClusterBombPowerUp(c) {
+		var o = c || {};
+		o.code = c.code || "cluster-bomb";
+		o.dead = false;
+		o.pointValue = c.pointValue || 5000;
+		o.ttl = c.ttl || { original: 500, value: 500 };
+
+		_gamevars.score -= o.pointValue;
+		vm.score(_gamevars.score);
+
+		o.update = function () {
+			this.ttl.value -= 1;
+			if (this.ttl.value <= 0) {
+				this.dead = true;
+			}
+		};
+		o.draw = function (ctx) {
+			var p = this.ttl.value *100 / this.ttl.original;
+			//ctx.fillStyle = "#f72";
+			pizzaTimer(ctx, 245, 581, 6, 0, p, 12, 25, "#f00");
 		};
 		return o;
 	};

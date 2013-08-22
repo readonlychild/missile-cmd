@@ -26,5 +26,7 @@ body { font-family:arial; font-size:9pt; }
 #btn-nw:hover { background:url('resources/btn-nextWave-over.png') no-repeat; }
 
 .dash-powerup { display:inline-block; width:50px; height:34px; background:url('resources/powerup.png') no-repeat; cursor:pointer; position:absolute; }
+.dash-powerup.clusterbomb     { background:url('resources/powerup-explosionsx4-off.png') no-repeat; left:185px; }
+.dash-powerup.clusterbomb.on  { background:url('resources/powerup-explosionsx4.png') no-repeat; }
 .dash-powerup.explosionsx4    { background:url('resources/powerup-explosionsx4-off.png') no-repeat; left:360px; }
 .dash-powerup.explosionsx4.on { background:url('resources/powerup-explosionsx4.png') no-repeat; }
